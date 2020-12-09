@@ -17,7 +17,7 @@ const homelist = (req, res) => {
         },
         {
           name: 'Cafe Hero',
-          address: '125 High Street, Reading, RG6 1PS',
+          address: '125 High Street, Reading, RG6 1PS',     
           rating: 4,
           facilities: ['Hot drinks', 'Food', 'Premium wifi'],
           distance: '200m'
@@ -83,13 +83,13 @@ const locationInfo = (req, res) => {
     });
 };
 
-const addReview = (req, res) => {
-  res.render('location-review-form',
-    {
-      title: 'Review Starcups on Loc8r' ,
-      pageHeader: { title: 'Review Starcups' }
-    });
-};
+      const addReview = (req, res) => {
+        res.render('location-review-form',
+          {
+            title: 'Review Starcups on Loc8r' ,
+            pageHeader: { title: 'Review Starcups' }
+          });
+      };
 
 module.exports = {
   homelist,
