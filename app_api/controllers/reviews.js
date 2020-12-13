@@ -11,7 +11,7 @@ const doSetAverageRating = (location) => {
     location.rating = parseInt(total / count, 10);
     location.save(err => {
       if (err) {
-        console.log(err);
+        console.log( err);
       } else {
         console.log(`Average rating updated to ${location.rating}`);
       }

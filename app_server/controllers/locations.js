@@ -1,4 +1,30 @@
-const homelist = (req, res) => {
+const request = require('request');
+let apiOptions = {
+  server: 'http://localhost:3000'
+};
+if (process.env.NODE_ENV === 'production') {
+  apiOptions.server = 'https://fathomless-basin-99040.herokuapp.com';
+}
+
+const requestOptions = {
+  url: 'https://fathomless-basin-99040.herokuapp.com/api/path',
+  method: 'GET',
+  json: {},
+  qs: {
+    offset: 20
+  }
+};
+request(requestOptions, (err, response, body) => {
+  if (err) {
+    console.log(err);
+  } else if (response.statusCode === 200) {
+    console.log(body);
+  } else {
+    console.log(response.statusCode);
+  }
+});
+
+const renderHomepage = (req, res, responseBody) => {
   res.render('locations-list',
     {
       title: 'Loc8r - find a place to work with wifi',
@@ -30,8 +56,28 @@ const homelist = (req, res) => {
           distance: '250m'
         }]
     });
-};
+  }
 
+const homelist = (req, res) => {
+  const path = '/api/locations';
+  const requestOptions = {
+    url: `${apiOptions.server}${path}`,
+    method: 'GET',
+    json: {},
+    qs: {
+      lng: -94.5837267687715,
+      lat: 39.06968447542569,
+      maxDistance: 20000
+    }
+  };
+  request(
+    requestOptions,
+    (err, response, body) => {
+      renderHomepage(req, res);
+    }
+  );
+};
+    
 const locationInfo = (req, res) => {
   res.render('location-info',
     {
@@ -83,13 +129,13 @@ const locationInfo = (req, res) => {
     });
 };
 
-      const addReview = (req, res) => {
-        res.render('location-review-form',
-          {
-            title: 'Review Starcups on Loc8r' ,
-            pageHeader: { title: 'Review Starcups' }
-          });
-      };
+const addReview = (req, res) => {
+  res.render('location-review-form',
+    {
+      title: 'Review Starcups on Loc8r' ,
+      pageHeader: { title: 'Review Starcups' }
+  });
+};
 
 module.exports = {
   homelist,

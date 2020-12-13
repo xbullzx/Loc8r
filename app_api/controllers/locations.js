@@ -10,10 +10,17 @@ const locationsListByDistance = async (req, res) => {
   };
   const geoOptions = {
     distanceField: "distance.calculated",
+    key: 'coords',
     spherical: true,
     maxDistance: 20000,
-    limit: 10
+    //limit: 10
   };
+  if (!lng || !lat) {
+    return res
+      .status(404)
+      .json({ "message": "lng and lat query parameters are required" });
+  }
+
   try {
     const results = await Loc.aggregate([
       {
@@ -23,8 +30,23 @@ const locationsListByDistance = async (req, res) => {
         }
       }
     ]);
+    const locations = results.map(result => {
+      return {
+        _id: result._id,
+        name: result.name,
+        address: result.address,
+        rating: result.rating,
+        facilities: result.facilities,
+        distance: `${result.distance.calculated.toFixed()}m`
+      }
+    });
+    res
+      .status(200)
+      .json(locations);
   } catch (err) {
-    console.log(err);
+    res
+      .status(404)
+      .json(err);
   }
 };
 
