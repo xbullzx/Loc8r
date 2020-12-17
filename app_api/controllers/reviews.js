@@ -48,7 +48,7 @@ const doAddReview = (req, res, location) => {
           .json(err);
       } else {
         updateAverageRating(location._id);
-        const thisReview = location.reviews.slice(-1).pop();
+        let thisReview = location.reviews.slice(-1).pop();
         res
           .status(201)
           .json(thisReview);
