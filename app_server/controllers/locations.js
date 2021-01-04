@@ -39,6 +39,7 @@ const formatDistance = (distance) => {
   return thisDistance + unit;
 };
 
+/* GET 'home' page */
 const renderHomepage = (req, res, responseBody) => {
   let message = null;
   if (!(responseBody instanceof Array)) {
@@ -50,13 +51,13 @@ const renderHomepage = (req, res, responseBody) => {
     }
   }
   res.render("locations-list", {
-    title: "Loc8r - find a place to work with wifi",
+    title: "LOC8r - find a place to work with wifi",
     pageHeader: {
-      title: "Loc8r",
+      title: "LOC8r",
       strapLine: "Find places to work with wifi near you!",
     },
     sidebar:
-      "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
+      "Looking for wifi and a seat? LOC8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.",
     locations: responseBody,
     message,
   });
@@ -94,7 +95,7 @@ const renderDetailPage = (req, res, location) => {
           title: location.name,
       },
       sidebar: {
-        context:"is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.",
+        context:"is on LOC8r because it has accessible wifi and space to sit down with your laptop and get some work done.",
         callToAction:"If you've been and you like it - or if you don't - please leave a review to help other people just like you."
       },
       location,
@@ -112,10 +113,11 @@ const getLocationInfo = (req, res, callback) => {
     requestOptions, 
     (err, {statusCode}, body) => {
     let data = body;
+    console.log('location info api', data)
     if (statusCode === 200) {
       data.coords = {
-        lng: body.coords[0],
-        lat: body.coords[1]
+        lng: body.coords.coordinates[0],
+        lat: body.coords.coordinates[1]
       };
       callback(req, res, data);
     } else {
@@ -133,7 +135,7 @@ const locationInfo = (req, res) => {
 const renderReviewForm = (req, res, {name}) => {
   res.render('location-review-form', 
     {
-    title: `Review ${name} on Loc8r`,
+    title: `Review ${name} on LOC8r`,
     pageHeader: { title: `Review ${name}` },
     error: req.query.err
   });

@@ -10,8 +10,8 @@ html
     nav.navbar.fixed-top.navbar-expand-md.navbar-light
       .container
         a.navbar-brand(href='/') Loc8r
-        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarMain')
-          span.navbar-toggler-icon
+        button.navbar-toggler.navbar-toggler-left(type='button', data-toggle='collapse', data-target='#navbarMain')
+          span.navbar-toggler-iconn.fas.fa-bars
         #navbarMain.navbar-collapse.collapse
           ul.navbar-nav.mr-auto
             li.nav-item
@@ -23,7 +23,11 @@ html
       .row
         .col-12
           small &copy; Getting MeanER - Simon Holmes/Clive Harber w/Special Help from the Artist formerly known as ~ Chris VanHorn  2020
-    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
-    script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+    script(src='/javascripts/bootstrap.min.js')
     script(src='/javascripts/validation.js')
+    block scripts
+    script(src='/build/runtime.0e49e2b53282f40c8925.js')
+    script(src='/build/polyfills.8c151b8375e767ff858f.js')
+    script(src='/build/main.8e415538e226c51439f7.js')

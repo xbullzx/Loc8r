@@ -103,6 +103,7 @@ const locationsReadOne = (req, res) => {
                   .status(404)
                   .json(err);
           } else {
+            console.log('location info api', location.coords.coordinates[0])
               return res
                   .status(200)
                   .json(location);
